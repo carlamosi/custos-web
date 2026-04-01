@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import carlaImg from "@/assets/carla.png";
+import cloeImg from "@/assets/cloe.png";
 
 const team = [
   {

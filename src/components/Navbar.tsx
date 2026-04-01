@@ -1,5 +1,6 @@
-import { Droplets } from "lucide-react";
 import { useState, useEffect } from "react";
+import logoIcon from "@/assets/logo_color.svg";
+import logoFull from "@/assets/nombre-completo.svg";
 
 const navLinks = [
   { href: "#com-funciona", label: "Com funciona" },
@@ -18,20 +19,36 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   return (
     <nav
-      className={`fixed top-0 w-full z-40 transition-all duration-300 py-4 ${
+      className={`fixed top-0 w-full z-40 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-background/90 border-b border-foreground/5"
-          : "bg-transparent"
+          ? "py-3 backdrop-blur-xl bg-background/90 border-b border-foreground/5 shadow-sm"
+          : "py-5 bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-2 group">
-          <Droplets className="w-6 h-6 text-secondary group-hover:scale-105 transition-transform" />
-          <span className="font-serif font-medium tracking-tighter text-xl">CUSTOS</span>
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2.5 group">
+          <img
+            src={logoIcon}
+            alt="Custos"
+            className="h-8 w-8 group-hover:scale-105 transition-transform duration-200"
+          />
+          <img
+            src={logoFull}
+            alt="Custos"
+            className="h-5 hidden sm:block"
+          />
         </a>
 
+        {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
           {navLinks.map((l) => (
             <a key={l.href} href={l.href} className="nav-link">
@@ -40,6 +57,7 @@ const Navbar = () => {
           ))}
         </div>
 
+        {/* Desktop CTA */}
         <div className="hidden lg:block">
           <a href="#comenca" className="btn-primary text-sm px-6 py-2.5 group">
             <span className="relative z-10">Prova Custos</span>
@@ -47,8 +65,9 @@ const Navbar = () => {
           </a>
         </div>
 
+        {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2"
+          className="lg:hidden p-2 relative z-50"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Obre menú"
         >
@@ -63,14 +82,20 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-30 bg-background pt-24 px-6 flex flex-col items-start gap-6 lg:hidden">
+      <div
+        className={`fixed inset-0 z-30 bg-background transition-all duration-300 lg:hidden flex flex-col ${
+          menuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+      >
+        <div className="pt-28 px-8 flex flex-col gap-2 flex-1">
           {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4"
+              className="text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 text-foreground hover:text-secondary transition-colors"
             >
               {l.label}
             </a>
@@ -78,12 +103,12 @@ const Navbar = () => {
           <a
             href="#comenca"
             onClick={() => setMenuOpen(false)}
-            className="btn-primary w-full text-center mt-4"
+            className="btn-primary w-full text-center mt-6"
           >
             Prova Custos
           </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

@@ -20,7 +20,7 @@ const team = [
     name: "Cloe Monté",
     role: "CMO & Cofundadora",
     bio: "Construeix la veu de Custos: propera, honesta, i sempre al costat de les famílies que busquen una solució real. Perquè el millor màrqueting és la veritat ben explicada.",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
+    img: cloeImg,
   },
 ];
 

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { AlertTriangle, Camera, Watch } from "lucide-react";
+import { ReactNode } from "react";
 
 const cards = [
   {
@@ -19,6 +20,25 @@ const cards = [
     text: "Un wearable que no es porta no protegeix ningú. I trucar cada dia és un pedaç que no tapa la ferida: l'angoixa continua.",
   },
 ];
+
+const ProblemCard = ({ icon, title, text, index }: { icon: ReactNode; title: string; text: string; index: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <motion.div
+      ref={ref}
+      className="card-custos"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
+    >
+      <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm">
+        {icon}
+      </div>
+      <h3 className="text-lg font-medium tracking-tight mb-3">{title}</h3>
+      <p className="text-sm text-foreground/70 leading-relaxed">{text}</p>
+    </motion.div>
+  );
+};
 
 const ElProblema = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -39,25 +59,9 @@ const ElProblema = () => {
         </motion.div>
 
         <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((card, i) => {
-            const { ref: cRef, isVisible: cVis } = useScrollReveal();
-            return (
-              <motion.div
-                key={i}
-                ref={cRef}
-                className="card-custos"
-                initial={{ opacity: 0, y: 30 }}
-                animate={cVis ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: (i + 1) * 0.1 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm">
-                  {card.icon}
-                </div>
-                <h3 className="text-lg font-medium tracking-tight mb-3">{card.title}</h3>
-                <p className="text-sm text-foreground/70 leading-relaxed">{card.text}</p>
-              </motion.div>
-            );
-          })}
+          {cards.map((card, i) => (
+            <ProblemCard key={i} icon={card.icon} title={card.title} text={card.text} index={i} />
+          ))}
         </div>
       </div>
     </section>

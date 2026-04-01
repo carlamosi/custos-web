@@ -22,6 +22,31 @@ const team = [
   },
 ];
 
+const TeamMember = ({ name, role, bio, img, index }: { name: string; role: string; bio: string; img: string; index: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <motion.div
+      ref={ref}
+      className="group"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
+    >
+      <div className="aspect-square rounded-4xl overflow-hidden mb-6 bg-sage relative">
+        <img
+          src={img}
+          alt={name}
+          className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+          loading="lazy"
+        />
+      </div>
+      <h3 className="text-xl font-serif font-medium tracking-tight mb-1">{name}</h3>
+      <p className="text-xs font-medium tracking-widest text-secondary uppercase mb-3">{role}</p>
+      <p className="text-sm text-foreground/70 leading-relaxed">{bio}</p>
+    </motion.div>
+  );
+};
+
 const Equip = () => {
   const { ref, isVisible } = useScrollReveal();
 
@@ -45,31 +70,9 @@ const Equip = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {team.map((member, i) => {
-            const { ref: mRef, isVisible: mVis } = useScrollReveal();
-            return (
-              <motion.div
-                key={i}
-                ref={mRef}
-                className="group"
-                initial={{ opacity: 0, y: 30 }}
-                animate={mVis ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: (i + 1) * 0.1 }}
-              >
-                <div className="aspect-square rounded-4xl overflow-hidden mb-6 bg-sage relative">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className="text-xl font-serif font-medium tracking-tight mb-1">{member.name}</h3>
-                <p className="text-xs font-medium tracking-widest text-secondary uppercase mb-3">{member.role}</p>
-                <p className="text-sm text-foreground/70 leading-relaxed">{member.bio}</p>
-              </motion.div>
-            );
-          })}
+          {team.map((member, i) => (
+            <TeamMember key={i} {...member} index={i} />
+          ))}
         </div>
 
         <motion.div

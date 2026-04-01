@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { Droplets, Brain, Zap } from "lucide-react";
+import { ReactNode } from "react";
 
 const pillars = [
   {
@@ -19,6 +20,22 @@ const pillars = [
     text: "Quan el sistema detecta una desviació significativa, t'envia una notificació graduada a l'app. Tu decideixes si truques o agafes el cotxe.",
   },
 ];
+
+const Pillar = ({ icon, title, text, index }: { icon: ReactNode; title: string; text: string; index: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
+    >
+      <div className="mb-4 md:mb-6">{icon}</div>
+      <h3 className="text-xl font-medium tracking-tight mb-3 md:mb-4">{title}</h3>
+      <p className="text-base text-foreground/70 leading-relaxed">{text}</p>
+    </motion.div>
+  );
+};
 
 const LaSolucio = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -42,22 +59,9 @@ const LaSolucio = () => {
         </motion.div>
 
         <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
-          {pillars.map((p, i) => {
-            const { ref: pRef, isVisible: pVis } = useScrollReveal();
-            return (
-              <motion.div
-                key={i}
-                ref={pRef}
-                initial={{ opacity: 0, y: 30 }}
-                animate={pVis ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: (i + 1) * 0.1 }}
-              >
-                <div className="mb-4 md:mb-6">{p.icon}</div>
-                <h3 className="text-xl font-medium tracking-tight mb-3 md:mb-4">{p.title}</h3>
-                <p className="text-base text-foreground/70 leading-relaxed">{p.text}</p>
-              </motion.div>
-            );
-          })}
+          {pillars.map((p, i) => (
+            <Pillar key={i} icon={p.icon} title={p.title} text={p.text} index={i} />
+          ))}
         </div>
       </div>
     </section>

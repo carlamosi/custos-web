@@ -34,19 +34,15 @@ const Historia = () => {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative w-full aspect-video rounded-4xl overflow-hidden bg-primary shadow-2xl group cursor-pointer border border-foreground/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/40 to-primary/80 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-80 z-10" />
-              <img
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop"
-                alt="Custos Story Video Thumbnail"
-                className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 ease-out relative z-0"
+            <div className="relative w-full aspect-video rounded-4xl overflow-hidden bg-primary shadow-2xl border border-foreground/10">
+              <iframe
+                src="https://www.youtube.com/embed/6t_RZKTkMIk"
+                title="La història de Custos"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
                 loading="lazy"
               />
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="w-20 h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 text-secondary ml-1" />
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

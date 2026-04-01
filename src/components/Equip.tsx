@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import carlaImg from "@/assets/carla.png";
+import cloeImg from "@/assets/cloe.png";
 
 const team = [
   {
@@ -12,13 +14,13 @@ const team = [
     name: "Carla Monté",
     role: "CTO & Cofundadora",
     bio: "Arquitecta del sistema que aprèn cada llar com si la conegués de tota la vida. Converteix dades de consum d'aigua en tranquil·litat familiar real.",
-    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1000&auto=format&fit=crop",
+    img: carlaImg,
   },
   {
     name: "Cloe Monté",
     role: "CMO & Cofundadora",
     bio: "Construeix la veu de Custos: propera, honesta, i sempre al costat de les famílies que busquen una solució real. Perquè el millor màrqueting és la veritat ben explicada.",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
+    img: cloeImg,
   },
 ];
 

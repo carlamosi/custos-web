@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import { Droplets, Brain, Zap } from "lucide-react";
+import { Droplets, Brain, Zap, ExternalLink, Wrench } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ReactNode } from "react";
 
 const pillars = [

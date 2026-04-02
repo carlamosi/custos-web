@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logoIcon from "@/assets/logo_color.svg";
 import logoFull from "@/assets/nombre-completo.svg";
 
 const navLinks = [
-  { href: "#com-funciona", label: "Com funciona" },
-  { href: "#experiencia-app", label: "L'App" },
-  { href: "#historia", label: "La història" },
-  { href: "#equip", label: "L'Equip" },
+  { href: "/", label: "Inici" },
+  { href: "/producte", label: "El Producte" },
+  { href: "/qui-som", label: "Qui som" },
+  { href: "/com-ho-hem-fet", label: "Com ho hem fet" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -19,11 +21,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav
@@ -35,7 +41,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
+        <Link to="/" className="flex items-center gap-2.5 group">
           <img
             src={logoIcon}
             alt="Custos"
@@ -46,23 +52,31 @@ const Navbar = () => {
             alt="Custos"
             className="h-5 hidden sm:block"
           />
-        </a>
+        </Link>
 
         {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="nav-link">
+            <Link
+              key={l.href}
+              to={l.href}
+              className={`nav-link ${
+                location.pathname === l.href
+                  ? "text-secondary"
+                  : ""
+              }`}
+            >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* Desktop CTA */}
         <div className="hidden lg:block">
-          <a href="#comenca" className="btn-primary text-sm px-6 py-2.5 group">
+          <Link to="/producte" className="btn-primary text-sm px-6 py-2.5 group">
             <span className="relative z-10">Prova Custos</span>
             <div className="shimmer-overlay" />
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -91,22 +105,24 @@ const Navbar = () => {
       >
         <div className="pt-28 px-8 flex flex-col gap-2 flex-1">
           {navLinks.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 text-foreground hover:text-secondary transition-colors"
+              to={l.href}
+              className={`text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 hover:text-secondary transition-colors ${
+                location.pathname === l.href
+                  ? "text-secondary"
+                  : "text-foreground"
+              }`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#comenca"
-            onClick={() => setMenuOpen(false)}
+          <Link
+            to="/producte"
             className="btn-primary w-full text-center mt-6"
           >
             Prova Custos
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

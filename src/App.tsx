@@ -8,6 +8,7 @@ import Producte from "./pages/Producte.tsx";
 import QuiSom from "./pages/QuiSom.tsx";
 import ComHoHemFet from "./pages/ComHoHemFet.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/producte" element={<Producte />} />

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import { Droplets, Brain, Zap } from "lucide-react";
+import { Droplets, Brain, Zap, ExternalLink, Wrench } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ReactNode } from "react";
 
 const pillars = [
@@ -88,6 +89,25 @@ const LaSolucio = () => {
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
             />
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+            <a
+              href="https://custos-dashboard.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-sm px-6 py-3 inline-flex items-center gap-2 group"
+            >
+              <span className="relative z-10">Obre la Dashboard</span>
+              <ExternalLink className="w-4 h-4 relative z-10" />
+              <div className="shimmer-overlay" />
+            </a>
+            <Link
+              to="/com-ho-hem-fet"
+              className="inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full border border-foreground/15 text-foreground/80 hover:border-secondary hover:text-secondary transition-all"
+            >
+              <Wrench className="w-4 h-4" />
+              Com ho hem construït
+            </Link>
           </div>
         </motion.div>
       </div>

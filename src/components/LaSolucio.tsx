@@ -63,6 +63,33 @@ const LaSolucio = () => {
             <Pillar key={i} icon={p.icon} title={p.title} text={p.text} index={i} />
           ))}
         </div>
+
+        {/* Live prototype dashboard */}
+        <motion.div
+          className="mt-16 md:mt-24"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="text-center mb-8">
+            <span className="section-label">Prototip en temps real</span>
+            <h3 className="text-2xl md:text-3xl heading-serif mt-2">
+              El nostre sensor, funcionant ara mateix
+            </h3>
+            <p className="text-base text-foreground/70 mt-3 max-w-2xl mx-auto">
+              Aquesta és la dashboard real del nostre prototip de cabalímetre. Dades en temps real, directament del sensor.
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-lg bg-background">
+            <iframe
+              src="https://custos-dashboard.vercel.app/"
+              title="Custos Dashboard — Prototip en temps real"
+              className="w-full h-[500px] md:h-[600px]"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Historia from "@/components/Historia";
 import Equip from "@/components/Equip";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 const QuiSom = () => (
@@ -11,7 +10,6 @@ const QuiSom = () => (
     <div className="pt-20" />
     <Historia />
     <Equip />
-    <FinalCTA />
     <Footer />
   </div>
 );

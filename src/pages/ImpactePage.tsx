@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Impacte from "@/components/Impacte";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 const ImpactePage = () => (
@@ -9,7 +8,6 @@ const ImpactePage = () => (
     <Navbar />
     <div className="pt-20" />
     <Impacte />
-    <FinalCTA />
     <Footer />
   </div>
 );

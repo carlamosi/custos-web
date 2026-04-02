@@ -3,7 +3,6 @@ import AppExperience from "@/components/AppExperience";
 import PerQueCustos from "@/components/PerQueCustos";
 import ProductePreus from "@/components/ProductePreus";
 import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 const Producte = () => (
@@ -15,7 +14,6 @@ const Producte = () => (
     <PerQueCustos />
     <ProductePreus />
     <FAQ />
-    <FinalCTA />
     <Footer />
   </div>
 );

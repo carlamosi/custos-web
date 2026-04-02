@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Wallet, BarChart3, PlayCircle } from "lucide-react";
 
-const words = ["Era", "un", "dimarts", "al", "matí.", null, "La", "iaia", "no", "havia", "trucat."];
+const words = ["Era", "un", "dimarts", "al", "matí.", null, "No", "havia", "trucat", "ningú."];
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);

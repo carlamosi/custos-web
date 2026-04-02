@@ -33,7 +33,7 @@ const Footer = () => (
         <div>
           <h4 className="text-xs font-medium uppercase tracking-widest mb-4 md:mb-6">Contacte</h4>
           <ul className="space-y-3 text-sm text-foreground/70">
-            <li><a href="https://custos.app" className="hover:text-secondary transition-colors">custos.app</a></li>
+            <li><a href="https://custos-guardian.vercel.app/" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">custos-guardian.vercel.app</a></li>
             <li>Terrassa, Barcelona</li>
           </ul>
         </div>

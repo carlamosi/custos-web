@@ -42,6 +42,15 @@ const Hero = () => {
           )}
         </h1>
 
+        <motion.p
+          className="mt-4 text-xl md:text-2xl lg:text-3xl font-serif text-foreground/60 max-w-3xl"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          El sensor invisible que cuida de qui viu sol quan tu no hi ets.
+        </motion.p>
+
         <motion.div
           className="mt-8 max-w-2xl"
           initial={{ opacity: 0, y: 20 }}

@@ -5,9 +5,9 @@ import logoFull from "@/assets/nombre-completo.svg";
 
 const navLinks = [
   { href: "/", label: "Inici" },
-  { href: "/producte", label: "El Producte" },
+  { href: "/producte", label: "Producte" },
+  { href: "/impacte", label: "Impacte" },
   { href: "/qui-som", label: "Qui som" },
-  { href: "/com-ho-hem-fet", label: "Com ho hem fet" },
 ];
 
 const Navbar = () => {
@@ -26,7 +26,6 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -40,38 +39,23 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <img
-            src={logoIcon}
-            alt="Custos"
-            className="h-8 w-8 group-hover:scale-105 transition-transform duration-200"
-          />
-          <img
-            src={logoFull}
-            alt="Custos"
-            className="h-5 hidden sm:block"
-          />
+          <img src={logoIcon} alt="Custos" className="h-8 w-8 group-hover:scale-105 transition-transform duration-200" />
+          <img src={logoFull} alt="Custos" className="h-5 hidden sm:block" />
         </Link>
 
-        {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               to={l.href}
-              className={`nav-link ${
-                location.pathname === l.href
-                  ? "text-secondary"
-                  : ""
-              }`}
+              className={`nav-link ${location.pathname === l.href ? "text-secondary" : ""}`}
             >
               {l.label}
             </Link>
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <div className="hidden lg:block">
           <Link to="/producte" className="btn-primary text-sm px-6 py-2.5 group">
             <span className="relative z-10">Prova Custos</span>
@@ -79,7 +63,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="lg:hidden p-2 relative z-50"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -95,12 +78,9 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`fixed inset-0 z-30 bg-background transition-all duration-300 lg:hidden flex flex-col ${
-          menuOpen
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-4 pointer-events-none"
+          menuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
         <div className="pt-28 px-8 flex flex-col gap-2 flex-1">
@@ -109,18 +89,13 @@ const Navbar = () => {
               key={l.href}
               to={l.href}
               className={`text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 hover:text-secondary transition-colors ${
-                location.pathname === l.href
-                  ? "text-secondary"
-                  : "text-foreground"
+                location.pathname === l.href ? "text-secondary" : "text-foreground"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Link
-            to="/producte"
-            className="btn-primary w-full text-center mt-6"
-          >
+          <Link to="/producte" className="btn-primary w-full text-center mt-6">
             Prova Custos
           </Link>
         </div>

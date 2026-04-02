@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Producte from "./pages/Producte.tsx";
+import ImpactePage from "./pages/ImpactePage.tsx";
 import QuiSom from "./pages/QuiSom.tsx";
 import ComHoHemFet from "./pages/ComHoHemFet.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -22,9 +23,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/producte" element={<Producte />} />
+          <Route path="/impacte" element={<ImpactePage />} />
           <Route path="/qui-som" element={<QuiSom />} />
           <Route path="/com-ho-hem-fet" element={<ComHoHemFet />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

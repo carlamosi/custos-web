@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import logoIcon from "@/assets/logo_color.svg";
 import logoFull from "@/assets/nombre-completo.svg";
@@ -23,12 +24,45 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
+
+  const mobileMenu = createPortal(
+    <div
+      className={`fixed inset-0 z-[60] h-dvh bg-background transition-all duration-300 lg:hidden flex flex-col ${
+        menuOpen ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 -translate-y-4 pointer-events-none"
+      }`}
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
+      aria-hidden={!menuOpen}
+    >
+      <div
+        className="pt-24 px-8 flex flex-col gap-2 flex-1 overflow-y-auto pb-8"
+        style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 0px))" }}
+      >
+        {navLinks.map((l) => (
+          <Link
+            key={l.href}
+            to={l.href}
+            className={`text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 hover:text-secondary transition-colors ${
+              location.pathname === l.href ? "text-secondary" : "text-foreground"
+            }`}
+          >
+            {l.label}
+          </Link>
+        ))}
+        <Link to="/producte" className="btn-primary w-full text-center mt-6">
+          Prova Custos
+        </Link>
+      </div>
+    </div>,
+    document.body,
+  );
 
   return (
     <>
@@ -65,7 +99,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className="lg:hidden p-2 relative z-50"
+            className="lg:hidden p-2 relative z-[70]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Tanca menú" : "Obre menú"}
           >
@@ -80,33 +114,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div
-        className={`fixed inset-0 z-30 h-dvh bg-background transition-all duration-300 lg:hidden flex flex-col ${
-          menuOpen ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 -translate-y-4 pointer-events-none"
-        }`}
-        style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
-        aria-hidden={!menuOpen}
-      >
-        <div
-          className="pt-24 px-8 flex flex-col gap-2 flex-1 overflow-y-auto pb-8"
-          style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 0px))" }}
-        >
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              to={l.href}
-              className={`text-2xl font-serif tracking-tight font-medium border-b border-foreground/10 w-full pb-4 pt-2 hover:text-secondary transition-colors ${
-                location.pathname === l.href ? "text-secondary" : "text-foreground"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
-          <Link to="/producte" className="btn-primary w-full text-center mt-6">
-            Prova Custos
-          </Link>
-        </div>
-      </div>
+      {mobileMenu}
     </>
   );
 };

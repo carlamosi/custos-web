@@ -81,8 +81,8 @@ const Navbar = () => {
 
       {/* Mobile fullscreen menu */}
       <div
-        className={`fixed inset-0 z-40 bg-background transition-all duration-300 lg:hidden flex flex-col ${
-          menuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
+        className={`fixed inset-0 z-[45] bg-background transition-all duration-300 lg:hidden flex flex-col ${
+          menuOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-4"
         }`}
         style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >

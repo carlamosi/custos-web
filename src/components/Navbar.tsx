@@ -37,6 +37,7 @@ const Navbar = () => {
           ? "py-3 backdrop-blur-xl bg-background/90 border-b border-foreground/5 shadow-sm"
           : "py-5 bg-transparent"
       }`}
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2.5 group">
@@ -66,7 +67,7 @@ const Navbar = () => {
         <button
           className="lg:hidden p-2 relative z-50"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Obre menú"
+          aria-label={menuOpen ? "Tanca menú" : "Obre menú"}
         >
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             {menuOpen ? (
@@ -78,12 +79,16 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* Mobile fullscreen menu */}
       <div
-        className={`fixed inset-0 z-30 bg-background transition-all duration-300 lg:hidden flex flex-col ${
+        className={`fixed inset-0 z-40 bg-background transition-all duration-300 lg:hidden flex flex-col ${
           menuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
+        style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >
-        <div className="pt-28 px-8 flex flex-col gap-2 flex-1">
+        <div className="pt-24 px-8 flex flex-col gap-2 flex-1 overflow-y-auto pb-8"
+          style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 0px))" }}
+        >
           {navLinks.map((l) => (
             <Link
               key={l.href}

@@ -37,7 +37,6 @@ const Navbar = () => {
           ? "py-3 backdrop-blur-xl bg-background/90 border-b border-foreground/5 shadow-sm"
           : "py-5 bg-transparent"
       }`}
-      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2.5 group">

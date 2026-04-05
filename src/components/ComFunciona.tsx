@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { Settings, BarChart3, ShieldCheck, Bell } from "lucide-react";
 import { ReactNode } from "react";
-import NotificationMockup from "./NotificationMockup";
 
 const steps = [
   { icon: <Settings className="w-7 h-7 text-secondary" />, title: "Instal·lació", text: "Un professional instal·la el sensor a la canonada interior. Menys de vint minuts. Sense obres. Cost inclòs.", dark: false },
@@ -64,10 +63,8 @@ const ComFunciona = () => {
           </div>
         </div>
 
-        {/* Notification mockup — visual payoff of step 4 */}
-        <div className="mt-16 md:mt-24">
-          <NotificationMockup />
-        </div>
+
+
       </div>
     </section>
   );

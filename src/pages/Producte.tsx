@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import AppExperience from "@/components/AppExperience";
+import NotificationMockup from "@/components/NotificationMockup";
 import PerQueCustos from "@/components/PerQueCustos";
 import ProductePreus from "@/components/ProductePreus";
 import FAQ from "@/components/FAQ";
@@ -11,6 +12,11 @@ const Producte = () => (
     <Navbar />
     <div className="pt-20" />
     <AppExperience />
+    <section className="py-16 md:py-24 bg-sage/30">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <NotificationMockup />
+      </div>
+    </section>
     <PerQueCustos />
     <ProductePreus />
     <FAQ />

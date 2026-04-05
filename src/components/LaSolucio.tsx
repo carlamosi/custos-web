@@ -3,6 +3,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { Droplets, Brain, Zap, ExternalLink, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ReactNode } from "react";
+import NotificationMockup from "./NotificationMockup";
 
 const pillars = [
   {
@@ -63,6 +64,11 @@ const LaSolucio = () => {
           {pillars.map((p, i) => (
             <Pillar key={i} icon={p.icon} title={p.title} text={p.text} index={i} />
           ))}
+        </div>
+
+        {/* Notification mockup */}
+        <div className="mt-16 md:mt-20">
+          <NotificationMockup />
         </div>
 
         {/* Live prototype dashboard */}

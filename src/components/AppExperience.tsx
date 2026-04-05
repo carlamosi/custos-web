@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { CheckCircle2, AlertTriangle, Coffee, Bath, Phone, Settings } from "lucide-react";
+import logoIcon from "@/assets/logo_color.svg";
 
 const AppExperience = () => {
   const [anomaly, setAnomaly] = useState(false);
@@ -64,64 +65,89 @@ const AppExperience = () => {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="w-[300px] h-[600px] bg-background rounded-[3rem] border-[12px] border-gray-900 shadow-2xl relative overflow-hidden flex flex-col shrink-0 text-foreground">
+            <div className="w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] bg-background rounded-[2.5rem] sm:rounded-[3rem] border-[10px] sm:border-[12px] border-gray-900 shadow-2xl relative overflow-hidden flex flex-col shrink-0 text-foreground">
               {/* Status bar */}
-              <div className="h-10 w-full flex justify-between items-center px-6 pt-2 text-[10px] font-medium absolute top-0 z-20">
+              <div className="h-10 w-full flex justify-between items-center px-5 sm:px-6 pt-2 text-[10px] font-medium absolute top-0 z-20">
                 <span>09:41</span>
                 <div className="flex gap-1.5 items-center text-xs">📶 📡 🔋</div>
               </div>
 
-              <div className="flex-grow pt-14 pb-6 px-5 flex flex-col relative z-10 w-full h-full bg-background">
+              {/* Push notification overlay */}
+              <AnimatePresence>
+                {anomaly && (
+                  <motion.div
+                    className="absolute top-12 left-3 right-3 sm:left-4 sm:right-4 z-30 rounded-xl sm:rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_-8px_rgba(0,0,0,0.15)] border border-foreground/5 p-3 sm:p-3.5"
+                    initial={{ opacity: 0, y: -40, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5">
+                      <img src={logoIcon} alt="" className="w-4 h-4 sm:w-5 sm:h-5 rounded-md" />
+                      <span className="text-[10px] sm:text-[11px] font-semibold tracking-wide text-foreground/80 uppercase">Custos</span>
+                      <span className="ml-auto text-[9px] sm:text-[10px] text-foreground/35 font-medium">ara</span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs font-semibold text-foreground leading-snug">
+                      ⚠️ La Maria no ha obert l'aixeta des de les 7:00
+                    </p>
+                    <p className="text-[10px] sm:text-[11px] text-foreground/55 mt-0.5 leading-relaxed">
+                      Pot ser un bon moment per trucar.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="flex-grow pt-14 pb-6 px-4 sm:px-5 flex flex-col relative z-10 w-full h-full bg-background">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="font-serif font-medium tracking-tighter text-xl">CUSTOS</h3>
-                  <Settings className="w-5 h-5 text-foreground/60" />
+                  <h3 className="font-serif font-medium tracking-tighter text-lg sm:text-xl">CUSTOS</h3>
+                  <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-foreground/60" />
                 </div>
 
-                <p className="text-xs font-medium uppercase tracking-widest text-foreground/50 mb-2">Monitoritzant</p>
-                <h4 className="text-xl font-medium tracking-tight mb-6">Casa de la iaia</h4>
+                <p className="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-foreground/50 mb-2">Monitoritzant</p>
+                <h4 className="text-lg sm:text-xl font-medium tracking-tight mb-6">Casa de la iaia</h4>
 
                 {/* Normal state */}
                 <div className={`flex flex-col transition-opacity duration-500 ${anomaly ? "opacity-0 absolute pointer-events-none" : "opacity-100"}`}>
-                  <div className="bg-gradient-to-br from-secondary to-emerald-700 rounded-3xl p-6 text-white shadow-lg mb-6 relative overflow-hidden">
+                  <div className="bg-gradient-to-br from-secondary to-emerald-700 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-lg mb-5 sm:mb-6 relative overflow-hidden">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-xl" />
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                        <CheckCircle2 className="w-5 h-5" />
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="font-medium">Tot en ordre</span>
+                      <span className="font-medium text-sm sm:text-base">Tot en ordre</span>
                     </div>
-                    <p className="text-sm text-white/80 mt-4">La rutina s'està complint segons el patró habitual.</p>
-                    <p className="text-xs text-white/60 mt-2">Última detecció: fa 15 min.</p>
+                    <p className="text-xs sm:text-sm text-white/80 mt-3 sm:mt-4">La rutina s'està complint segons el patró habitual.</p>
+                    <p className="text-[10px] sm:text-xs text-white/60 mt-1.5 sm:mt-2">Última detecció: fa 15 min.</p>
                   </div>
 
-                  <div className="bg-white rounded-2xl p-5 shadow-sm border border-foreground/5 mb-6">
-                    <h5 className="text-xs font-medium text-foreground/60 mb-4">Activitat d'avui</h5>
-                    <div className="h-24 flex items-end justify-between gap-1">
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-sm border border-foreground/5 mb-5 sm:mb-6">
+                    <h5 className="text-[10px] sm:text-xs font-medium text-foreground/60 mb-3 sm:mb-4">Activitat d'avui</h5>
+                    <div className="h-20 sm:h-24 flex items-end justify-between gap-1">
                       {[10, 5, 60, 20, 30, 40, 10, 5, 15].map((h, i) => (
                         <div key={i} className={`w-full rounded-t-sm ${[2, 5].includes(i) ? "bg-secondary" : i === 3 ? "bg-secondary/40" : "bg-sage"}`} style={{ height: `${h}%` }} />
                       ))}
                     </div>
-                    <div className="flex justify-between mt-2 text-[9px] text-foreground/40 font-medium">
+                    <div className="flex justify-between mt-2 text-[8px] sm:text-[9px] text-foreground/40 font-medium">
                       <span>06:00</span><span>09:00</span><span>Ara</span>
                     </div>
                   </div>
 
                   <div>
-                    <h5 className="text-xs font-medium text-foreground/60 mb-3">Últims esdeveniments</h5>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center text-sm">
+                    <h5 className="text-[10px] sm:text-xs font-medium text-foreground/60 mb-2 sm:mb-3">Últims esdeveniments</h5>
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex justify-between items-center text-xs sm:text-sm">
                         <div className="flex items-center gap-2">
-                          <Coffee className="w-4 h-4 text-secondary" />
+                          <Coffee className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-secondary" />
                           <span className="font-medium">Aixeta cuina</span>
                         </div>
-                        <span className="text-xs text-foreground/50">09:26</span>
+                        <span className="text-[10px] sm:text-xs text-foreground/50">09:26</span>
                       </div>
-                      <div className="flex justify-between items-center text-sm">
+                      <div className="flex justify-between items-center text-xs sm:text-sm">
                         <div className="flex items-center gap-2">
-                          <Bath className="w-4 h-4 text-secondary" />
+                          <Bath className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-secondary" />
                           <span className="font-medium">Dutxa principal</span>
                         </div>
-                        <span className="text-xs text-foreground/50">08:15</span>
+                        <span className="text-[10px] sm:text-xs text-foreground/50">08:15</span>
                       </div>
                     </div>
                   </div>
@@ -129,20 +155,20 @@ const AppExperience = () => {
 
                 {/* Anomaly state */}
                 <div className={`flex flex-col h-full transition-opacity duration-500 ${anomaly ? "opacity-100" : "opacity-0 absolute pointer-events-none"}`}>
-                  <div className="bg-gradient-to-br from-destructive to-red-700 rounded-3xl p-6 text-white shadow-[0_10px_25px_-5px_rgba(229,62,62,0.4)] mb-6 animate-pulse">
+                  <div className="bg-gradient-to-br from-destructive to-red-700 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-[0_10px_25px_-5px_rgba(229,62,62,0.4)] mb-5 sm:mb-6 animate-pulse">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                        <AlertTriangle className="w-5 h-5" />
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="font-medium">Alerta de Patró</span>
+                      <span className="font-medium text-sm sm:text-base">Alerta de Patró</span>
                     </div>
-                    <p className="text-sm text-white/90 mt-4 leading-snug">S'esperava ús d'aigua entre les 08:00 i les 09:00. Sense activitat detectada.</p>
-                    <p className="text-xs text-white/70 mt-3 font-medium">Tractant-se de rutina de matí, recomanem verificar.</p>
+                    <p className="text-xs sm:text-sm text-white/90 mt-3 sm:mt-4 leading-snug">S'esperava ús d'aigua entre les 08:00 i les 09:00. Sense activitat detectada.</p>
+                    <p className="text-[10px] sm:text-xs text-white/70 mt-2 sm:mt-3 font-medium">Tractant-se de rutina de matí, recomanem verificar.</p>
                   </div>
 
-                  <div className="bg-white rounded-2xl p-5 shadow-sm border border-foreground/5 mb-6">
-                    <h5 className="text-xs font-medium text-foreground/60 mb-4">Activitat d'avui</h5>
-                    <div className="h-24 flex items-end justify-between gap-1">
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-sm border border-foreground/5 mb-5 sm:mb-6">
+                    <h5 className="text-[10px] sm:text-xs font-medium text-foreground/60 mb-3 sm:mb-4">Activitat d'avui</h5>
+                    <div className="h-20 sm:h-24 flex items-end justify-between gap-1">
                       {[10, 5, 60, 20, 30, 5, 5, 5, 5].map((h, i) => (
                         <div
                           key={i}
@@ -157,16 +183,16 @@ const AppExperience = () => {
                         />
                       ))}
                     </div>
-                    <div className="flex justify-between mt-2 text-[9px] text-foreground/40 font-medium">
+                    <div className="flex justify-between mt-2 text-[8px] sm:text-[9px] text-foreground/40 font-medium">
                       <span>06:00</span><span className="text-destructive font-medium">Patró absent</span><span>Ara</span>
                     </div>
                   </div>
 
                   <div className="mt-auto space-y-2">
-                    <button className="w-full bg-primary text-primary-foreground rounded-xl py-3 text-sm font-medium flex justify-center items-center gap-2">
-                      <Phone className="w-4 h-4" /> Trucar a la iaia
+                    <button className="w-full bg-primary text-primary-foreground rounded-xl py-2.5 sm:py-3 text-xs sm:text-sm font-medium flex justify-center items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Trucar a la iaia
                     </button>
-                    <button className="w-full bg-white border border-foreground/10 text-foreground/70 rounded-xl py-3 text-sm font-medium">
+                    <button className="w-full bg-white border border-foreground/10 text-foreground/70 rounded-xl py-2.5 sm:py-3 text-xs sm:text-sm font-medium">
                       Falsa alarma
                     </button>
                   </div>

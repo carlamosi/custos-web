@@ -26,12 +26,13 @@ const ProblemCard = ({ icon, title, text, index }: { icon: ReactNode; title: str
   return (
     <motion.div
       ref={ref}
-      className="card-custos"
+      className="card-custos group cursor-default"
       initial={{ opacity: 0, y: 30 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm">
+      <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm transition-transform duration-300 group-hover:animate-[shake_0.4s_ease-in-out]">
         {icon}
       </div>
       <h3 className="text-lg font-medium tracking-tight mb-3">{title}</h3>
